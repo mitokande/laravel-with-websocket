@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TestEvent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,8 @@ Route::get('/', function () {
 
 Route::get('/receive', function () {
     return view('pusher-test.receiver');
+});
+
+Route::get('/broadcast', function () {
+    broadcast(new TestEvent("Hello World!"))->toOthers();
 });
