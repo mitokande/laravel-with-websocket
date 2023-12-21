@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\TestEvent;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,7 @@ Route::get('/receive', function () {
 });
 
 Route::get('/broadcast', function () {
-    broadcast(new TestEvent("Hello World!"))->toOthers();
+    $image = ImageController::getImage(request()->get('number'));
+    broadcast(new TestEvent($image))->toOthers();
+    return $image;
 });
